@@ -1,0 +1,90 @@
+<div class="row">
+    <div class="col">
+        <!-- (operation options) -->
+        <div class="col-md-12 mb-4">
+            <app-modal></app-modal>
+
+            <button type="button" class="btn " (click)="openModal(template)"><i class="fas fa-trash-alt"></i> Delete</button>
+        </div>
+    </div>
+    <div class="col">
+        <!-- (Dropdown list) -->
+        <div>
+            <select [(ngModel)]="selected" (ngModelChange)="onSelect(selected)" class="form-control">
+        <option *ngFor="let option of CategoriesList" 
+                [value]="option.ID"> 
+          {{ option.CategoryName }}
+        </option>
+   </select>
+        </div>
+
+    </div>
+</div>
+
+<!-- Table with panel -->
+<div class="card card-cascade narrower">
+
+    <!--Card image-->
+    <div class="view view-cascade rgba-indigo-strong narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
+
+        <a href="" class="white-text mx-3"> Products </a>
+    </div>
+    <!--/Card image-->
+
+    <div class="px-4">
+
+        <div class="table-wrapper">
+            <!--Table-->
+            <table class="table table-hover mb-0 text-da-lg">
+
+                <!--Table head-->
+                <thead>
+                    <tr>
+                        <th>
+                            <input class="form-check-input" type="checkbox" id="checkbox" disabled>
+                            <label class="form-check-label" for="checkbox" class="mr-2 label-table"></label>
+                        </th>
+
+                        <!-- <th class="th-lg">ID</th> -->
+                        <th class="th-lg">Code</th>
+                        <th class="th-lg">Name</th>
+                        <th class="th-lg">Price</th>
+                    </tr>
+                </thead>
+                <!--Table head-->
+
+                <!--Table body-->
+                <tbody>
+                    <tr *ngFor="let product of selectedData | paginate: { itemsPerPage: 5, currentPage: p }">
+                        <td scope="row">
+                            <input #{{product.count}} [(ngModel)]="product.selected" type="checkbox" />
+                        </td>
+                        <!-- <td>{{product.ID}}</td> -->
+                        <td>{{product.code}}</td>
+                        <td>{{product.Name}}</td>
+                        <td>{{product.Price}}</td>
+                        <td>
+                            <app-edit-product [SelectedProductIdInNested]='product.ID'></app-edit-product>
+                            <!-- <input class="btn" type="button" name="" value="Edit" (click)="editProduct(product.ID)"> -->
+                        </td>
+                    </tr>
+                </tbody>
+                <!--Table body-->
+            </table>
+            <!--Table-->
+        </div>
+
+    </div>
+
+</div>
+<!-- Table with panel -->
+<pagination-controls (pageChange)="p = $event" class="table-wrapper" class="p-5 "></pagination-controls>
+<!-- ========================(delete modal)======================= -->
+
+<ng-template #template>
+    <div class="modal-body text-center">
+        <p>Are you sure?</p>
+        <button type="button" class="btn btn-default" (click)="RemoveSelectedProducts()">Yes</button>
+        <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+    </div>
+</ng-template>

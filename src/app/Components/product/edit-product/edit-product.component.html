@@ -1,0 +1,33 @@
+<button type="button" class="btn" (click)="openModal(template)"><i class="fas fa-pencil-alt"></i>  Edit</button>
+<!-- Modal -->
+<ng-template #template>
+    <div class="modal-body text-center">
+        <p>Add new product</p>
+        <form class="col s12 ">
+            <div class="row">
+                <div class="form-group my-3">
+                    <label for="inputLGEx">Code</label>
+
+                    <input [(ngModel)]="SelectedProduct.code" [ngModelOptions]="{standalone: true}" type="number" id="inputLGEx" class="form-control">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group my-3">
+                    <label for="inputLGEx">Name</label>
+
+                    <input [(ngModel)]="SelectedProduct.Name" [ngModelOptions]="{standalone: true}" type="text" id="inputLGEx" class="form-control ">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group my-3">
+                    <label for="inputLGEx">Price</label>
+
+                    <input [(ngModel)]="SelectedProduct.Price" [ngModelOptions]="{standalone: true}" type="number" id="inputLGEx" class="form-control ">
+                </div>
+            </div>
+        </form>
+        <button type="button" class="btn btn-default" (click)="confirm()">Save</button>
+        <button type="button" class="btn btn-primary" (click)="decline()">Cancel</button>
+    </div>
+</ng-template>
+<!-- Modal -->
